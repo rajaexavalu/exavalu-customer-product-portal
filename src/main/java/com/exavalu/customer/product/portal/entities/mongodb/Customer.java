@@ -1,16 +1,18 @@
 package com.exavalu.customer.product.portal.entities.mongodb;
 
+import java.util.Map;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Customers")
 public class Customer {
-	
+
 	@Id
 	private String mongoId;
-	
+
 	private String address;
-	private CardDetails cardDetails;
+	private Map<String, CardDetails> cardDetails;
 	private String emailId;
 	private String firstName;
 	private String lastName;
@@ -18,9 +20,18 @@ public class Customer {
 	private String location;
 	private String phoneNumber;
 	private String pincode;
+	private String CustomerId;
 
-	public Customer(String address, CardDetails cardDetails, String emailId, String firstName, String lastName,
-			String gender, String location, String phoneNumber, String pincode) {
+	public String getCustomerId() {
+		return CustomerId;
+	}
+
+	public void setCustomerId(String CustomerId) {
+		this.CustomerId = CustomerId;
+	}
+
+	public Customer(String address, Map<String, CardDetails> cardDetails, String emailId, String firstName,
+			String lastName, String gender, String location, String phoneNumber, String pincode, String CustomerId) {
 		super();
 		this.address = address;
 		this.cardDetails = cardDetails;
@@ -31,18 +42,15 @@ public class Customer {
 		this.location = location;
 		this.phoneNumber = phoneNumber;
 		this.pincode = pincode;
-	}
-
-	public Customer() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.CustomerId = CustomerId;
 	}
 
 	@Override
 	public String toString() {
-		return "Customer [address=" + address + ", cardDetails=" + cardDetails + ", emailId=" + emailId + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", gender=" + gender + ", location=" + location
-				+ ", phoneNumber=" + phoneNumber + ", pincode=" + pincode + "]";
+		return "Customer [mongoId=" + mongoId + ", address=" + address + ", cardDetails=" + cardDetails + ", emailId="
+				+ emailId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", location="
+				+ location + ", phoneNumber=" + phoneNumber + ", pincode=" + pincode + ", CustomerId=" + CustomerId
+				+ "]";
 	}
 
 	public String getAddress() {
@@ -51,14 +59,6 @@ public class Customer {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public CardDetails getCardDetails() {
-		return cardDetails;
-	}
-
-	public void setCardDetails(CardDetails cardDetails) {
-		this.cardDetails = cardDetails;
 	}
 
 	public String getEmailId() {
@@ -117,4 +117,11 @@ public class Customer {
 		this.pincode = pincode;
 	}
 
+	public Map<String, CardDetails> getCardDetails() {
+		return cardDetails;
+	}
+
+	public void setCardDetails(Map<String, CardDetails> cardDetails) {
+		this.cardDetails = cardDetails;
+	}
 }
